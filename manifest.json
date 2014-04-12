@@ -1,0 +1,59 @@
+{
+  "author": {
+    "name": "Zendesk",
+    "email": "support@zendesk.com"
+  },
+  "location": "ticket_sidebar",
+  "defaultLocale": "en",
+  "private": false,
+  "singleInstall": true,
+  "frameworkVersion": "0.5",
+  "version": "1.0",
+  "parameters": [
+  {
+    "name": "Flag 1 Label",
+    "type": "text",
+    "default": "Flag 1"
+  },
+  {
+    "name": "Flag 1 Value",
+    "type": "text",
+    "default": "flag1"
+  },
+  {
+    "name": "Flag 1 Message",
+    "type": "text",
+    "default": "found flag1!"
+  },
+  {
+    "name": "Flag 2 Label",
+    "type": "text",
+    "default": "Flag 2"
+  },
+  {
+    "name": "Flag 2 Value",
+    "type": "text",
+    "default": "flag2"
+  },
+  {
+    "name": "Flag 2 Message",
+    "type": "text",
+    "default": "found flag2!"
+  },
+  {
+    "name": "Flag 3 Label",
+    "type": "text",
+    "default": "Flag 3"
+  },
+  {
+    "name": "Flag 3 Value",
+    "type": "text",
+    "default": "flag3"
+  },
+  {
+    "name": "Flag 3 Message",
+    "type": "text",
+    "default": "found flag3!"
+  }
+]
+}

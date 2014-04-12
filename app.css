@@ -1,0 +1,82 @@
+p {
+  margin-bottom: 15px;
+}
+
+.loading {
+
+  text-align: center;
+
+  &:before {
+    content: app-asset-url("dotted-bar.gif");
+    position: relative;
+    top: 5px;
+  }
+
+  p {
+    padding-top: 15px;
+  }
+}
+
+#need_setup {
+  text-align: center;
+}
+
+ul, ol {
+  margin-left: 0;
+}
+
+.append_error {
+  padding-left: 0px;
+}
+
+.loader img {
+  height: 18px;
+  width: 18px;
+}
+
+.message .error, .append_error {
+  color: red;
+  font-weight: bold;
+}
+
+.message {
+  .error {
+    color: red;
+    padding: 10px;
+  }
+
+  .info {
+    font-weight: bold;
+  }
+}
+
+.records {
+  .field_label, .type {
+    font-weight: bold;
+  }
+
+  .field {
+    margin-bottom: 5px;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .show_more {
+    margin-top: 5px;
+    text-align: right;
+  }
+
+  .sub_records {
+    margin-top: 10px;
+
+    &:not(.expanded) {
+      display: none;
+    }
+  }
+
+  .type {
+    margin-bottom: 10px;
+  }
+}

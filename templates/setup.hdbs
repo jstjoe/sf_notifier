@@ -1,0 +1,4 @@
+<div id="need_setup">
+  <p>Looks like you haven't connected your Salesforce account to your Zendesk account.</p>
+  <p><a href="#/admin/extensions/crm" class="btn btn-primary">Connect with Salesforce.com</a><br>and then <a href="#" class="try_again">try again</a>.</p>
+</div>

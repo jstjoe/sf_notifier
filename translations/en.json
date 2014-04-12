@@ -1,0 +1,15 @@
+{
+  "problem": "There's been a problem: {{error}}",
+
+  "records": {
+    "minimize": "Minimize results",
+    "no_data":  "No matching data was found in Salesforce based on your configuration.",
+    "show_all": "Show all results"
+  },
+
+  "sync": {
+    "error": "Failed to synchronize user info.",
+    "loading": "Retrieving details from Salesforce...",
+    "taking_longer": "Retrieval is taking longer than usual..."
+  }
+}
