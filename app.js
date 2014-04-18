@@ -5,11 +5,14 @@
     retryCount: 0,
     curRetryId: undefined,
 
-    defaultState: 'loading',
+    // defaultState: 'loading',
 
     requests: {
       lookupById: function(requesterId, ticketId) { return { url: encodeURI(helpers.fmt("/api/v2/users/%@/crm_data.json?ticket_id=%@", requesterId, ticketId)) }; },
-      statusById: function(requesterId, ticketId) { return { url: encodeURI(helpers.fmt("/api/v2/users/%@/crm_data/status.json?ticket_id=%@", requesterId, ticketId)) }; }
+      statusById: function(requesterId, ticketId) {
+        return {
+          url: encodeURI(helpers.fmt("/api/v2/users/%@/crm_data/status.json?ticket_id=%@", requesterId, ticketId)) };
+        }
     },
 
     events: {
@@ -74,7 +77,7 @@
       if (status == 'pending') {
         this.checkLater();
       } else {
-        this.renderRecords(records);
+        // this.renderRecords(records);
         this.retryCount = 0;
         //Add checking for certain values here
         this.checkForFlags(records);
@@ -82,87 +85,185 @@
       }
     },
 
-    toggleShowMore: function() {
-      var self = this;
+    // toggleShowMore: function() {
+    //   var self = this;
 
-      this.$(".records .sub_records").slideToggle("fast", function() {
-        self.$(".records_toggle").toggle();
+    //   this.$(".records .sub_records").slideToggle("fast", function() {
+    //     self.$(".records_toggle").toggle();
 
-        if (self.$(".sub_records").is(":hidden")) {
-          self.store('autoExpand', false);
-        } else {
-          self.store('autoExpand', true);
-        }
-      });
-    },
+    //     if (self.$(".sub_records").is(":hidden")) {
+    //       self.store('autoExpand', false);
+    //     } else {
+    //       self.store('autoExpand', true);
+    //     }
+    //   });
+    // },
 
-    renderRecords: function(records) {
-      var additionalRecords = records.slice(1),
-          autoExpand        = this.store('autoExpand') || false;
+    // renderRecords: function(records) {
+    //   var additionalRecords = records.slice(1),
+    //       autoExpand        = this.store('autoExpand') || false;
 
-      this.switchTo('records', {
-        mainRecord: records[0],
-        showExpanded: autoExpand,
-        showMore: additionalRecords.length,
-        subRecords: additionalRecords
-      });
-    },
+    //   this.switchTo('records', {
+    //     mainRecord: records[0],
+    //     showExpanded: autoExpand,
+    //     showMore: additionalRecords.length,
+    //     subRecords: additionalRecords
+    //   });
+    // },
 
     resetApp: function() {
-      this.switchTo('loading');
+      // this.switchTo('loading');
       this.dataLookup();
     },
     
     // TODO: DRY up the flag settings storage
     checkForFlags: function(records) {
-      var flag1label = this.setting('Flag 1 Label'),
-      flag1 = this.setting('Flag 1 Value'),
-      flag1message = this.setting('Flag 1 Message'),
-      flag2label = this.setting('Flag 2 Label'),
-      flag2 = this.setting('Flag 2 Value'),
-      flag2message = this.setting('Flag 2 Message'),
-      flag3label = this.setting('Flag 3 Label'),
-      flag3 = this.setting('Flag 3 Value'),
-      flag3message = this.setting('Flag 3 Message'),
-      i = 0,
-      l = 0;
+      var flag1 = {
+        type: this.setting('Flag 1 Record Type'),
+        label: this.setting('Flag 1 Label'),
+        value: this.setting('Flag 1 Value'),
+        message: this.setting('Flag 1 Message')
+      },
+        flag2 = {
+          type: this.setting('Flag 2 Record Type'),
+          label: this.setting('Flag 2 Label'),
+          value: this.setting('Flag 2 Value'),
+          message: this.setting('Flag 2 Message'),
+        },
+        flag3 = {
+          type: this.setting('Flag 3 Record Type'),
+          label: this.setting('Flag 3 Label'),
+          value: this.setting('Flag 3 Value'),
+          message: this.setting('Flag 3 Message')
+        },
+        flag4 = {
+          type: this.setting('Flag 4 Record Type'),
+          label: this.setting('Flag 4 Label'),
+          value: this.setting('Flag 4 Value'),
+          message: this.setting('Flag 4 Message')
+        },
+        flag5 = {
+          type: this.setting('Flag 5 Record Type'),
+          label: this.setting('Flag 5 Label'),
+          value: this.setting('Flag 5 Value'),
+          message: this.setting('Flag 5 Message')
+        },
+        flag6 = {
+          type: this.setting('Flag 6 Record Type'),
+          label: this.setting('Flag 6 Label'),
+          value: this.setting('Flag 6 Value'),
+          message: this.setting('Flag 6 Message')
+        },
+        flag7 = {
+          type: this.setting('Flag 7 Record Type'),
+          label: this.setting('Flag 7 Label'),
+          value: this.setting('Flag 7 Value'),
+          message: this.setting('Flag 7 Message')
+        },
+        flag8 = {
+          type: this.setting('Flag 8 Record Type'),
+          label: this.setting('Flag 8 Label'),
+          value: this.setting('Flag 8 Value'),
+          message: this.setting('Flag 8 Message')
+        },
+        flag9 = {
+          type: this.setting('Flag 9 Record Type'),
+          label: this.setting('Flag 9 Label'),
+          value: this.setting('Flag 9 Value'),
+          message: this.setting('Flag 9 Message')
+        },
+        flag10 = {
+          type: this.setting('Flag 10 Record Type'),
+          label: this.setting('Flag 10 Label'),
+          value: this.setting('Flag 10 Value'),
+          message: this.setting('Flag 10 Message')
+        },
+        
+        i = 0;
+
       while (records[i]) {
-        while (records[i].fields[l]){
-          var label = records[i].fields[l].label,
-          value = records[i].fields[l].value;
-          console.log(label);
-          console.log(value);
-          switch (label) {
-            case flag1label:
-              if (value == flag1){
-                //pop a banner w specific instructions
-                //use flag1message as the string
-                services.notify(flag1message);
-              }
-            break;
-            case flag2label:
-              if (value == flag2){
-                //pop a banner w specific instructions
-                //use flag2message as the string
-                services.notify(flag2message);
-              }
-            break;
-            case flag3label:
-              if (value == flag3){
-                //pop a banner w specific instructions
-                //use flag3message as the string
-                services.notify(flag3message);
-              }
-            break;
-          }
-          l++;
+        console.log(records[i]);
+        var rec = records[i];
+        if(rec.record_type == flag1.type) {
+          this.scanFields(records[i], flag1);
         }
+        if(rec.record_type == flag2.type) {
+          this.scanFields(records[i], flag2);
+        }
+        if(rec.record_type == flag3.type) {
+          this.scanFields(records[i], flag3);
+        }
+        if(rec.record_type == flag4.type) {
+          this.scanFields(records[i], flag4);
+        }
+        if(rec.record_type == flag5.type) {
+          this.scanFields(records[i], flag5);
+        }
+        if(rec.record_type == flag6.type) {
+          this.scanFields(records[i], flag6);
+        }
+        if(rec.record_type == flag7.type) {
+          this.scanFields(records[i], flag7);
+        }
+        if(rec.record_type == flag8.type) {
+          this.scanFields(records[i], flag8);
+        }
+        if(rec.record_type == flag9.type) {
+          this.scanFields(records[i], flag9);
+        }
+        if(rec.record_type == flag10.type) {
+          this.scanFields(records[i], flag10);
+        }
+        
         i++;
       }
     },
     
 
     /** Helpers **/
+    scanFields: function(record, flag) {
+      var l = 0;
+      while (record.fields[l]){
+        var label = record.fields[l].label,
+        value = record.fields[l].value;
+        console.log(label);
+        console.log(value);
+        if (label == flag.label) {
+          if (value == flag.value){
+              // pop a banner w specific instructions
+              services.notify(helpers.fmt('<a href="%@">%@</a>', record.fields[l].url, flag.message), 'alert');
+            } else if (!flag.value && value) {
+              // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
+              services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", record.fields[l].url, flag.message, value), 'alert');
+            }
+        }
+
+        // switch (label) {
+        //   case flag.label:
+        //     if (value == flag.value){
+        //       //pop a banner w specific instructions
+        //       services.notify(flag.message, 'notice');
+        //     } else if (!flag.value && value) {
+        //       // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
+        //       services.notify(flag.message + value);
+        //     }
+        //   break;
+        //   case flag.label:
+        //     if (value == flag.value){
+        //       //pop a banner w specific instructions
+        //       services.notify(flag.message);
+        //     }
+        //   break;
+        //   case flag.label:
+        //     if (value == flag.value){
+        //       //pop a banner w specific instructions
+        //       services.notify(flag.message);
+        //     }
+        //   break;
+        // }
+        l++;
+      }
+    },
 
     handleFailedRequest: function(jqXHR, textStatus, errorThrown) {
       if (jqXHR.status == 403) {

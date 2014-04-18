@@ -7,53 +7,208 @@
   "defaultLocale": "en",
   "private": false,
   "singleInstall": true,
-  "frameworkVersion": "0.5",
-  "version": "1.0",
+  "frameworkVersion": "1.0",
+  "version": "1.1",
   "parameters": [
+  {
+    "name": "Flag 1 Record Type",
+    "type": "text",
+    "default": "account"
+  },
   {
     "name": "Flag 1 Label",
     "type": "text",
-    "default": "Flag 1"
+    "default": "VOC"
   },
   {
     "name": "Flag 1 Value",
     "type": "text",
-    "default": "flag1"
+    "default": "T1"
   },
   {
     "name": "Flag 1 Message",
     "type": "text",
-    "default": "found flag1!"
+    "default": "VOC Customer"
+  },
+  {
+    "name": "Flag 2 Record Type",
+    "type": "text",
+    "default": "account"
   },
   {
     "name": "Flag 2 Label",
     "type": "text",
-    "default": "Flag 2"
+    "default": "VOC"
   },
   {
     "name": "Flag 2 Value",
     "type": "text",
-    "default": "flag2"
+    "default": "T2"
   },
   {
     "name": "Flag 2 Message",
     "type": "text",
-    "default": "found flag2!"
+    "default": "Strategic Account"
+  },
+  {
+    "name": "Flag 3 Record Type",
+    "type": "text",
+    "default": "contracts via account"
   },
   {
     "name": "Flag 3 Label",
     "type": "text",
-    "default": "Flag 3"
+    "default": "Support Level"
   },
   {
     "name": "Flag 3 Value",
     "type": "text",
-    "default": "flag3"
+    "default": ""
   },
   {
     "name": "Flag 3 Message",
     "type": "text",
-    "default": "found flag3!"
+    "default": "Support Level"
+  },
+  {
+    "name": "Flag 4 Record Type",
+    "type": "text",
+    "default": "contracts via account"
+  },
+  {
+    "name": "Flag 4 Label",
+    "type": "text",
+    "default": "Sev 1 Response Time (Text)"
+  },
+  {
+    "name": "Flag 4 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 4 Message",
+    "type": "text",
+    "default": "SEV1"
+  },
+  {
+    "name": "Flag 5 Record Type",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 5 Label",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 5 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 5 Message",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 6 Record Type",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 6 Label",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 6 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 6 Message",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 7 Record Type",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 7 Label",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 7 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 7 Message",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 8 Record Type",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 8 Label",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 8 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 8 Message",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 9 Record Type",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 9 Label",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 9 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 9 Message",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 10 Record Type",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 10 Label",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 10 Value",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "Flag 10 Message",
+    "type": "text",
+    "default": ""
   }
 ]
 }
