@@ -93,12 +93,12 @@
   {
     "name": "Flag 5 Record Type",
     "type": "text",
-    "default": ""
+    "default": "contracts via account"
   },
   {
     "name": "Flag 5 Label",
     "type": "text",
-    "default": ""
+    "default": "Sev 2 Response Time (Text)"
   },
   {
     "name": "Flag 5 Value",
@@ -108,7 +108,7 @@
   {
     "name": "Flag 5 Message",
     "type": "text",
-    "default": ""
+    "default": "SEV2"
   },
   {
     "name": "Flag 6 Record Type",

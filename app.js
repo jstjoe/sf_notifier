@@ -226,16 +226,19 @@
       while (record.fields[l]){
         var label = record.fields[l].label,
         value = record.fields[l].value;
-        console.log(label);
-        console.log(value);
+        
         if (label == flag.label) {
           if (value == flag.value){
-              // pop a banner w specific instructions
-              services.notify(helpers.fmt('<a href="%@">%@</a>', record.fields[l].url, flag.message), 'alert');
-            } else if (!flag.value && value) {
-              // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
-              services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", record.fields[l].url, flag.message, value), 'alert');
-            }
+            console.log("URL: " + record.url);
+
+            // pop a banner w specific instructions
+            // services.notify(helpers.fmt('<a href="%@">%@</a>', record.url, flag.message), 'alert');
+            this.alertUser(record.url, flag.message);
+          } else if (!flag.value && value) {
+            // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
+            // services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", record.url, flag.message, value), 'alert');
+            this.alertUser(record.url, flag.message, value);
+          }
         }
 
         // switch (label) {
@@ -262,6 +265,13 @@
         //   break;
         // }
         l++;
+      }
+    },
+    alertUser: function(url, message, value) {
+      if(value) {
+        services.notify(helpers.fmt('<a href="%@">%@</a>', url, message), 'alert');
+      } else {
+        services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", url, message, value), 'alert');
       }
     },
 
