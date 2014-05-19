@@ -4,7 +4,7 @@
     // Local vars
     retryCount: 0,
     curRetryId: undefined,
-
+    defaultState: 'notifications',
     // defaultState: 'loading',
 
     requests: {
@@ -180,9 +180,14 @@
         },
         
         i = 0;
-
+      
+      // remove duplicates
+      records = _.uniq(records);
+      // console.log(recordValues);
+      console.log(records);
+      //check the records
       while (records[i]) {
-        console.log(records[i]);
+        
         var rec = records[i];
         if(rec.record_type == flag1.type) {
           this.scanFields(records[i], flag1);
@@ -233,11 +238,13 @@
 
             // pop a banner w specific instructions
             // services.notify(helpers.fmt('<a href="%@">%@</a>', record.url, flag.message), 'alert');
-            this.alertUser(record.url, flag.message);
+            this.notifyUser(record.url, flag.message);
+            console.log(record.url, flag.message);
           } else if (!flag.value && value) {
             // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
             // services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", record.url, flag.message, value), 'alert');
-            this.alertUser(record.url, flag.message, value);
+            this.notifyUser(record.url, flag.message, value);
+            console.log(record.url, flag.message, value);
           }
         }
 
@@ -265,14 +272,35 @@
         //   break;
         // }
         l++;
+        //TODO: render some indication of completion on last iteration
       }
     },
-    alertUser: function(url, message, value) {
-      if(value) {
-        services.notify(helpers.fmt('<a href="%@">%@</a>', url, message), 'alert');
+    notifyUser: function(url, message, value) {
+      var tray = services.appsTray();
+      tray.show();
+      var note;
+      if(!value) {
+        // services.notify(helpers.fmt('<a href="%@">%@</a>', url, message), 'alert');
+        note = this.renderTemplate('note', {
+          message: message,
+          value: value,
+          url: url
+        });
+        this.$('span.loading').hide();
+        this.$('div.notifications').append(note);
       } else {
-        services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", url, message, value), 'alert');
+        // services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", url, message, value), 'alert');
+        note = this.renderTemplate('note', {
+          message: message,
+          value: value,
+          url: url
+        });
+        this.$('span.loading').hide();
+        this.$('div.notifications').append(note);
       }
+    },
+    alertUser: function() {
+
     },
 
     handleFailedRequest: function(jqXHR, textStatus, errorThrown) {

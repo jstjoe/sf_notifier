@@ -1,7 +1,6 @@
-<header>
+{{!-- <header>
   <span class="logo"/>
-  <span class="loader app_loader"/>
   <h3>{{setting "title"}}</h3>
-</header>
+</header> --}}
 <section data-main />
 <section class="append_error"></section>

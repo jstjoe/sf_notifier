@@ -1,0 +1,3 @@
+<div class="notifications">
+  <span class="loading">{{spinner "dotted"}}</span>
+</div>
