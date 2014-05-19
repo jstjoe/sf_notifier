@@ -85,32 +85,6 @@
       }
     },
 
-    // toggleShowMore: function() {
-    //   var self = this;
-
-    //   this.$(".records .sub_records").slideToggle("fast", function() {
-    //     self.$(".records_toggle").toggle();
-
-    //     if (self.$(".sub_records").is(":hidden")) {
-    //       self.store('autoExpand', false);
-    //     } else {
-    //       self.store('autoExpand', true);
-    //     }
-    //   });
-    // },
-
-    // renderRecords: function(records) {
-    //   var additionalRecords = records.slice(1),
-    //       autoExpand        = this.store('autoExpand') || false;
-
-    //   this.switchTo('records', {
-    //     mainRecord: records[0],
-    //     showExpanded: autoExpand,
-    //     showMore: additionalRecords.length,
-    //     subRecords: additionalRecords
-    //   });
-    // },
-
     resetApp: function() {
       // this.switchTo('loading');
       this.dataLookup();
@@ -183,9 +157,8 @@
       
       // remove duplicates
       records = _.uniq(records);
-      // console.log(recordValues);
-      console.log(records);
       //check the records
+      var last = records[records.length - 1];
       while (records[i]) {
         
         var rec = records[i];
@@ -219,7 +192,9 @@
         if(rec.record_type == flag10.type) {
           this.scanFields(records[i], flag10);
         }
-        
+        if(rec == last) {
+          this.$('span.loading').hide();
+        }
         i++;
       }
     },
@@ -237,40 +212,12 @@
             console.log("URL: " + record.url);
 
             // pop a banner w specific instructions
-            // services.notify(helpers.fmt('<a href="%@">%@</a>', record.url, flag.message), 'alert');
             this.notifyUser(record.url, flag.message);
-            console.log(record.url, flag.message);
           } else if (!flag.value && value) {
             // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
-            // services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", record.url, flag.message, value), 'alert');
             this.notifyUser(record.url, flag.message, value);
-            console.log(record.url, flag.message, value);
           }
         }
-
-        // switch (label) {
-        //   case flag.label:
-        //     if (value == flag.value){
-        //       //pop a banner w specific instructions
-        //       services.notify(flag.message, 'notice');
-        //     } else if (!flag.value && value) {
-        //       // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
-        //       services.notify(flag.message + value);
-        //     }
-        //   break;
-        //   case flag.label:
-        //     if (value == flag.value){
-        //       //pop a banner w specific instructions
-        //       services.notify(flag.message);
-        //     }
-        //   break;
-        //   case flag.label:
-        //     if (value == flag.value){
-        //       //pop a banner w specific instructions
-        //       services.notify(flag.message);
-        //     }
-        //   break;
-        // }
         l++;
         //TODO: render some indication of completion on last iteration
       }
@@ -279,25 +226,13 @@
       var tray = services.appsTray();
       tray.show();
       var note;
-      if(!value) {
-        // services.notify(helpers.fmt('<a href="%@">%@</a>', url, message), 'alert');
-        note = this.renderTemplate('note', {
-          message: message,
-          value: value,
-          url: url
-        });
-        this.$('span.loading').hide();
-        this.$('div.notifications').append(note);
-      } else {
-        // services.notify(helpers.fmt("<a href='%@'>%@: %@</a>", url, message, value), 'alert');
-        note = this.renderTemplate('note', {
-          message: message,
-          value: value,
-          url: url
-        });
-        this.$('span.loading').hide();
-        this.$('div.notifications').append(note);
-      }
+      note = this.renderTemplate('note', {
+        message: message,
+        value: value,
+        url: url
+      });
+      this.$('span.loading').hide();
+      this.$('div.notifications').append(note);
     },
     alertUser: function() {
 
