@@ -1,0 +1,1 @@
+<div class="sf_note"><h3>{{message}}{{#if value}}: {{value}}{{/if}} <a href="{{url}}"><i class="icon-info-sign pull-right"></i></a></h3></div>

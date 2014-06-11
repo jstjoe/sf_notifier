@@ -1,1 +1,1 @@
-<div class="sf_note alert"><h4>{{message}}{{#if value}}: {{value}}{{/if}} <a href="{{url}}"><i class="icon-info-sign pull-right"></i></a></h4></div>
+<div class="sf_note"><h4>{{message}}{{#if value}}: {{value}}{{/if}} <a href="{{url}}"><i class="icon-info-sign pull-right"></i></a></h4></div>

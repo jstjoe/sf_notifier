@@ -1,3 +1,23 @@
-<div class="notifications">
-  <span class="loading">{{spinner "dotted"}}</span>
+{{!-- span is hidden by the js when loading completes --}}
+<span class="loading">{{spinner "dotted"}}</span>
+{{!-- div is shown by js when loading completes --}}
+<div class="notifications well hide">
+  {{!-- notes get injected here --}}
+</div>
+
+
+<!-- modal -->
+<div id="alert_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h2 id="myModalLabel">Alert: Severity 1 Issue</h2>
+  </div>
+  <div class="modal-body">
+    {{!-- span is hidden by the js when loading completes --}}
+    <span class="loading_modal">{{spinner "dotted"}}</span>
+    <div class="notifications_modal well hide">
+      {{!-- inject alerts here --}}
+
+    </div>
+  </div>
 </div>

@@ -74,6 +74,6 @@ ul, ol {
     margin-bottom: 10px;
   }
 }
-.sf_note:last-child {
+.notifications {
   margin-bottom: 0;
 }

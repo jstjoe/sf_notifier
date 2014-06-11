@@ -79,8 +79,12 @@
       } else {
         // this.renderRecords(records);
         this.retryCount = 0;
+
+        // this is where we check for a severity tag
+        var shouldAlert = this.checkForAlertTag();
         //Add checking for certain values here
-        this.checkForFlags(records);
+        this.checkForFlags(records, shouldAlert);
+
         
       }
     },
@@ -89,9 +93,19 @@
       // this.switchTo('loading');
       this.dataLookup();
     },
+    checkForAlertTag: function(){
+      // does the current ticket contain the alert tag?
+      var tags = this.ticket().tags(),
+        alertTag = this.setting('Alert tag'),
+        shouldAlert = _.contains(tags, alertTag);
+      if(shouldAlert) {
+        this.alertUser();
+      }
+      return shouldAlert;
+    },
     
     // TODO: DRY up the flag settings storage
-    checkForFlags: function(records) {
+    checkForFlags: function(records, shouldAlert) {
       var flag1 = {
         type: this.setting('Flag 1 Record Type'),
         label: this.setting('Flag 1 Label'),
@@ -155,6 +169,7 @@
         
         i = 0;
       
+      
       // remove duplicates
       records = _.uniq(records);
       //check the records
@@ -163,45 +178,47 @@
         
         var rec = records[i];
         if(rec.record_type == flag1.type) {
-          this.scanFields(records[i], flag1);
+          this.scanFields(records[i], flag1, shouldAlert);
         }
         if(rec.record_type == flag2.type) {
-          this.scanFields(records[i], flag2);
+          this.scanFields(records[i], flag2, shouldAlert);
         }
         if(rec.record_type == flag3.type) {
-          this.scanFields(records[i], flag3);
+          this.scanFields(records[i], flag3, shouldAlert);
         }
         if(rec.record_type == flag4.type) {
-          this.scanFields(records[i], flag4);
+          this.scanFields(records[i], flag4, shouldAlert);
         }
         if(rec.record_type == flag5.type) {
-          this.scanFields(records[i], flag5);
+          this.scanFields(records[i], flag5, shouldAlert);
         }
         if(rec.record_type == flag6.type) {
-          this.scanFields(records[i], flag6);
+          this.scanFields(records[i], flag6, shouldAlert);
         }
         if(rec.record_type == flag7.type) {
-          this.scanFields(records[i], flag7);
+          this.scanFields(records[i], flag7, shouldAlert);
         }
         if(rec.record_type == flag8.type) {
-          this.scanFields(records[i], flag8);
+          this.scanFields(records[i], flag8, shouldAlert);
         }
         if(rec.record_type == flag9.type) {
-          this.scanFields(records[i], flag9);
+          this.scanFields(records[i], flag9, shouldAlert);
         }
         if(rec.record_type == flag10.type) {
-          this.scanFields(records[i], flag10);
+          this.scanFields(records[i], flag10, shouldAlert);
         }
         if(rec == last) {
           this.$('span.loading').hide();
         }
+
+
         i++;
       }
     },
     
 
     /** Helpers **/
-    scanFields: function(record, flag) {
+    scanFields: function(record, flag, shouldAlert) {
       var l = 0;
       while (record.fields[l]){
         var label = record.fields[l].label,
@@ -209,33 +226,50 @@
         
         if (label == flag.label) {
           if (value == flag.value){
-            console.log("URL: " + record.url);
-
-            // pop a banner w specific instructions
-            this.notifyUser(record.url, flag.message);
+            this.notifyUser(record.url, flag.message, shouldAlert);
           } else if (!flag.value && value) {
             // if there is no specified flag value, but there is a field value... e.g. Support Level = x level should be true
-            this.notifyUser(record.url, flag.message, value);
+            this.notifyUser(record.url, flag.message, value, shouldAlert);
           }
+
+
         }
         l++;
         //TODO: render some indication of completion on last iteration
       }
     },
-    notifyUser: function(url, message, value) {
+    notifyUser: function(url, message, value, shouldAlert) {
       var tray = services.appsTray();
       tray.show();
-      var note;
-      note = this.renderTemplate('note', {
+      var note = this.renderTemplate('note', {
         message: message,
         value: value,
         url: url
       });
-      this.$('span.loading').hide();
-      this.$('div.notifications').append(note);
+      var alertTerms = 'Custom Support Terms';
+      if(message != alertTerms) { // don't special terms to the sidebar (modal only)
+        this.$('span.loading').hide();
+        this.$('div.notifications').append(note).show();
+      }
+      
+
+      // fill alert modal?
+      var relevant = _.contains(['Support Level', 'SEV1', 'Royalty Terms'], message); // make this a setting (splice a string to an array)
+      if(shouldAlert && relevant) {
+        var alert = this.renderTemplate('alert', {
+          message: message,
+          value: value,
+          url: url
+        });
+
+        this.$('span.loading_modal').hide();
+        this.$('div.notifications_modal').append(alert).show();
+
+      }
     },
     alertUser: function() {
 
+      this.$('#alert_modal').modal('show');
     },
 
     handleFailedRequest: function(jqXHR, textStatus, errorThrown) {

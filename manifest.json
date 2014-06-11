@@ -8,8 +8,13 @@
   "private": false,
   "singleInstall": true,
   "frameworkVersion": "1.0",
-  "version": "1.2",
+  "version": "1.2.1",
   "parameters": [
+  {
+    "name": "Alert tag",
+    "type": "text",
+    "default": "sev_3"
+  },
   {
     "name": "Flag 1 Record Type",
     "type": "text",
@@ -103,7 +108,7 @@
   {
     "name": "Flag 5 Value",
     "type": "text",
-    "default": ""
+    "default": "Custom Support Terms"
   },
   {
     "name": "Flag 5 Message",
