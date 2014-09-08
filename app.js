@@ -19,7 +19,7 @@
       'click .records .records_toggle': 'toggleShowMore',
 
       /** App callbacks **/
-      'app.activated':                'resetApp',
+      'app.created':                'resetApp',
       'ticket.requester.id.changed':  'dataLookup',
       'click .try_again':             'resetApp',
 

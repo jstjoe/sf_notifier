@@ -108,7 +108,7 @@
   {
     "name": "Flag 5 Value",
     "type": "text",
-    "default": "Custom Support Terms"
+    "default": ""
   },
   {
     "name": "Flag 5 Message",
